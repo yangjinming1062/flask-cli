@@ -1,0 +1,76 @@
+账号注册
+---
+tags:
+  - 用户管理
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: UserRegisterRequest
+      required:
+        - account
+        - username
+        - password
+      properties:
+        account:
+          type: string
+          description: 账号.
+        username:
+          type: string
+          description: 用户名.
+        password:
+          type: string
+          description: 密码.
+        phone:
+          type: string
+          description: 手机号.
+        email:
+          type: string
+          description: 邮箱.
+responses:
+  201:
+    description: 注册成功
+    schema:
+      id: UserInfo
+      properties:
+        id:
+          type: string
+        account:
+          type: string
+          description: 账号.
+        email:
+          type: string
+          description: 邮箱.
+        phone:
+          type: string
+          description: 手机.
+        username:
+          type: string
+          description: 用户名.
+        created_data:
+          type: string
+          description: 注册日期.
+        valid:
+          type: boolean
+          description: 账号有效性.
+        admin:
+          type: boolean
+          description: 是否管理员.
+        manager:
+          type: boolean
+          description: 是否具有业务维护权限.
+        domains:
+          type: array
+          description: 账号管理的业务域列表.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+  422:
+    description: 参数无效/缺失参数.
+  500:
+    description: 服务器异常.

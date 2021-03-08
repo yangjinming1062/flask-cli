@@ -1,0 +1,22 @@
+修改Demo信息
+---
+tags:
+  - Demo
+parameters:
+  - name: Authorization
+    in: header
+    required: true
+    schema:
+      id: AuthorizationInfo
+  - name: id
+    in: url
+    required: true
+    description: Demo_ID.
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: DemoRequest
+responses:
+  200:
+    description: 修改成功.

@@ -1,0 +1,29 @@
+添加Demo信息
+---
+tags:
+  - Demo
+parameters:
+  - name: Authorization
+    in: header
+    required: true
+    schema:
+      id: AuthorizationInfo
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: DemoRequest
+      required:
+        - name
+      properties:
+        name:
+          type: string
+responses:
+  201:
+    description: 添加成功.
+    schema:
+      id: AddedResponse
+      properties:
+        id:
+          type: string
+          description: 新增成功新增数据的ID.

@@ -1,0 +1,88 @@
+查询Demo信息列表
+---
+tags:
+  - Demo
+definitions:
+  - schema:
+      id: Pagination
+      description: 列表查询分页信息.
+      properties:
+        page:
+          type: integer
+          description: 页面索引.
+        limit:
+          type: integer
+          description: 页面数据条数限制.
+          example: 10
+        total:
+          type: integer
+          description: 总数据条数.
+  - schema:
+      id: Demo
+      description: Demo信息.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        update_date:
+          type: string
+          description: 最后操作时间.
+parameters:
+  - name: Authorization
+    in: header
+    required: true
+    schema:
+      id: AuthorizationInfo
+  - name: page
+    in: arg
+    required: false
+    description: 分页查询想要查询第几页数据，不提供时默认没有分页信息查询全部数据.
+    type: string
+  - name: limit
+    in: arg
+    required: false
+    description: 分页查询查询页的数据量，默认为10，不填写page参数时该参数无效.
+    type: string
+  - name: order_by
+    in: arg
+    required: false
+    description: 对数据进行排列的依据，可以为类的任意属性名，不填写时按默认排序.
+    type: string
+    example: update_date
+  - name: order
+    in: arg
+    required: false
+    description: 排序方向，如果该参数不为asc则对排序结果进行倒置，没有order_by参数时不生效.
+    type: string
+    example: asc
+  - name: filter_by
+    in: arg
+    required: false
+    description: 过滤的属性名，需要为基础类型的属性，例如name.
+    type: string
+    example: name
+  - name: filter
+    in: arg
+    required: false
+    description: 过滤值，设置了过滤属性名时期望的取值.
+    type: string
+    example: zhangsan
+  - name: fuzzy
+    in: arg
+    required: false
+    description: 是否模糊查询，默认精确匹配，只有属性值和过滤值完全相同即可，模糊查询时发现过滤值的都显示.
+    type: boolean
+    example: true
+responses:
+  200:
+    description: 响应成功.
+    schema:
+      properties:
+        pagination:
+          description: 分页信息.
+          $ref: '#/definitions/Pagination'
+        content:
+          type: array
+          items:
+            $ref: '#/definitions/Demo'
